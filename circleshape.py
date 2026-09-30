@@ -3,6 +3,7 @@ import pygame
 
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
+    #????? same as in asteroids
     containers: tuple[pygame.sprite.Group, ...]
 
     def __init__(self, x: float, y: float, radius: float) -> None:
@@ -23,3 +24,8 @@ class CircleShape(pygame.sprite.Sprite):
     def update(self, dt: float) -> None:
         # must override
         pass
+
+    def collides_with(self, other) -> bool:
+        collision_distance = self.radius + other.radius
+        from_player = pygame.math.Vector2.distance_to(self.position, other.position)
+        return from_player <= collision_distance
